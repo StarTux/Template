@@ -1,0 +1,42 @@
+#!/bin/bash
+
+usage() {
+    echo "Usage: $0 <PluginName>"
+}
+
+src=`dirname $0`
+name=$1
+lower=`echo ${name} | tr '[:upper:]' '[:lower:]'`
+if [ -z "$name" ]; then
+    usage >&2
+    exit 1
+fi
+echo Template Folder: $src
+echo Plugin name: $name
+echo Namespace: com.cavetale.$lower
+if [ -e "$name" ]; then
+    echo "File $name already exists." >&2
+    exit 1
+fi
+
+set -e
+mkdir -v "$name"
+for file in "$src"/*; do
+    case "`basename $file`" in
+	template|.git|"$name")
+	    echo $file
+	    continue
+	    ;;
+	*)
+	    cp -Rv "$file" "$name"
+	    ;;
+    esac
+done
+
+mv -v "$name"/src/main/java/com/cavetale/template/{Template,${name}}Plugin.java
+mv -v "$name"/src/test/java/com/cavetale/template/{Template,${name}}Test.java
+mv -v "$name"/src/main/java/com/cavetale/{template,${lower}}
+mv -v "$name"/src/test/java/com/cavetale/{template,${lower}}
+find "$name" -type f -exec sed -i "s/template/${lower}/g;s/Template/${name}/g" {} \;
+
+exit 0
