@@ -21,10 +21,9 @@ fi
 
 set -e
 mkdir -v "$name"
-for file in "$src"/*; do
+for file in "$src"/* "$src"/.??*; do
     case "`basename $file`" in
 	template|.git|"$name")
-	    echo $file
 	    continue
 	    ;;
 	*)
