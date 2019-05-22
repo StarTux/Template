@@ -14,7 +14,10 @@ public final class TemplatePlugin extends JavaPlugin {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+    public boolean onCommand(final CommandSender sender,
+                             final Command command,
+                             final String alias,
+                             final String[] args) {
         return true;
     }
 }
