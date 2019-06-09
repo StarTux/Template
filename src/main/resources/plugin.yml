@@ -9,6 +9,7 @@ depend: []
 softdepend: []
 commands:
   template:
+    aliases: []
     description: Template Command
     permission: template.template
     permission-message: You do not have permission!
@@ -16,5 +17,6 @@ commands:
 permissions:
   template.template:
     description: Use /template
+    default: op
     children:
       template.child: true
