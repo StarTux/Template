@@ -33,9 +33,7 @@ for file in "$src"/* "$src"/.??*; do
 done
 
 mv -v "$name"/src/main/java/com/cavetale/template/{Template,${name}}Plugin.java
-mv -v "$name"/src/test/java/com/cavetale/template/{Template,${name}}Test.java
 mv -v "$name"/src/main/java/com/cavetale/{template,${lower}}
-mv -v "$name"/src/test/java/com/cavetale/{template,${lower}}
 find "$name" -type f -exec sed -i "s/template/${lower}/g;s/Template/${name}/g" {} \;
 
 echo Finished setting up $name
