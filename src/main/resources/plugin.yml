@@ -12,11 +12,9 @@ commands:
     aliases: []
     description: Template Command
     permission: template.template
-    permission-message: You do not have permission!
-    usage: /<command>
+    usage: |-
+      /template
 permissions:
   template.template:
     description: Use /template
     default: op
-    children:
-      template.child: true
