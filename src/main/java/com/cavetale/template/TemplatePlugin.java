@@ -1,23 +1,34 @@
 package com.cavetale.template;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TemplatePlugin extends JavaPlugin {
+    TemplateCommand templateCommand = new TemplateCommand(this);
+    EventListener eventListener = new EventListener(this);
+
     @Override
     public void onEnable() {
+        templateCommand.enable();
+        eventListener.enable();
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            enter(player);
+        }
     }
 
     @Override
     public void onDisable() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            exit(player);
+        }
     }
 
-    @Override
-    public boolean onCommand(final CommandSender sender,
-                             final Command command,
-                             final String alias,
-                             final String[] args) {
-        return true;
+    public void enter(Player player) {
+        // TODO
+    }
+
+    public void exit(Player player) {
+        // TODO
     }
 }
