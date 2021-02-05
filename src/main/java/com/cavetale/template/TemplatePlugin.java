@@ -12,23 +12,9 @@ public final class TemplatePlugin extends JavaPlugin {
     public void onEnable() {
         templateCommand.enable();
         eventListener.enable();
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            enter(player);
-        }
     }
 
     @Override
     public void onDisable() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            exit(player);
-        }
-    }
-
-    public void enter(Player player) {
-        // TODO
-    }
-
-    public void exit(Player player) {
-        // TODO
     }
 }
