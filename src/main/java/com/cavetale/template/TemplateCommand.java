@@ -1,26 +1,21 @@
 package com.cavetale.template;
 
-import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.bukkit.command.Command;
+import com.cavetale.core.command.AbstractCommand;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 
-@RequiredArgsConstructor
-public final class TemplateCommand implements TabExecutor {
-    private final TemplatePlugin plugin;
-
-    public void enable() {
-        plugin.getCommand("template").setExecutor(this);
+public final class TemplateCommand extends AbstractCommand<TemplatePlugin> {
+    protected TemplateCommand(final TemplatePlugin plugin) {
+        super(plugin, "template");
     }
 
     @Override
-    public boolean onCommand(final CommandSender sender, final Command command, final String alias, final String[] args) {
-        return true;
+    protected void onEnable() {
+        rootNode.addChild("info").denyTabCompletion()
+            .description("Info Command")
+            .senderCaller(this::info);
     }
 
-    @Override
-    public List<String> onTabComplete(final CommandSender sender, final Command command, final String alias, final String[] args) {
-        return null;
+    protected boolean info(CommandSender sender, String[] args) {
+        return false;
     }
 }
