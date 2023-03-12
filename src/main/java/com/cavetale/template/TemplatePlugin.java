@@ -3,8 +3,8 @@ package com.cavetale.template;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TemplatePlugin extends JavaPlugin {
-    TemplateCommand templateCommand = new TemplateCommand(this);
-    EventListener eventListener = new EventListener(this);
+    protected final TemplateCommand templateCommand = new TemplateCommand(this);
+    protected final EventListener eventListener = new EventListener(this);
 
     @Override
     public void onEnable() {

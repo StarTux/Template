@@ -1,12 +1,12 @@
 main: com.cavetale.template.TemplatePlugin
-
 name: Template
+
 version: 0.1
-description: Template Plugin
 api-version: 1.19
 
 author: StarTux
 website: https://github.com/StarTux/Template
+description: Template Plugin
 
 depend: [Core]
 softdepend: []
