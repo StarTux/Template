@@ -1,7 +1,7 @@
 main: com.cavetale.template.TemplatePlugin
 name: Template
 
-version: 0.1
+version: ${version}
 api-version: 1.19
 
 author: StarTux
