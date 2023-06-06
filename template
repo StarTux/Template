@@ -6,6 +6,7 @@ usage() {
 
 src=`dirname $0`
 name=$1
+package=$2
 lower=`echo ${name} | tr '[:upper:]' '[:lower:]'`
 if [ -z "$name" ]; then
     usage >&2
@@ -13,7 +14,6 @@ if [ -z "$name" ]; then
 fi
 echo Template Folder: $src
 echo Plugin name: $name
-echo Namespace: com.cavetale.$lower
 if [ -e "$name" ]; then
     echo "File $name already exists." >&2
     exit 1
@@ -36,6 +36,15 @@ mv -v "$name"/src/main/java/com/cavetale/template/{Template,${name}}Plugin.java
 mv -v "$name"/src/main/java/com/cavetale/template/{Template,${name}}Command.java
 mv -v "$name"/src/main/java/com/cavetale/{template,${lower}}
 find "$name" -type f -exec sed -i "s/template/${lower}/g;s/Template/${name}/g" {} \;
+
+if [ ! -z "$package" ]; then
+    path=`echo $package | sed 's|\.|/|g'`
+    echo package $package $path
+    mkdir -p "$name"/src/main/java/"$path"
+    mv -v "$name"/src/main/java/com/cavetale/"$lower" "$name"/src/main/java/"$path"/
+    rmdir --ignore-fail-on-non-empty -p "$name"/src/main/java/com/cavetale/
+    find "$name" -type f -exec sed -i "s/com\.cavetale/${package}/g" {} \;
+fi
 
 echo Finished setting up $name
 exit 0
