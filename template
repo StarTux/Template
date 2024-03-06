@@ -35,6 +35,8 @@ done
 mv -v "$name"/src/main/java/com/cavetale/template/{Template,${name}}Plugin.java
 mv -v "$name"/src/main/java/com/cavetale/template/{Template,${name}}Command.java
 mv -v "$name"/src/main/java/com/cavetale/{template,${lower}}
+mv -v "$name"/src/test/java/com/cavetale/template/{Template,${name}}Test.java
+mv -v "$name"/src/test/java/com/cavetale/{template,${lower}}
 find "$name" -type f -exec sed -i "s/template/${lower}/g;s/Template/${name}/g" {} \;
 
 if [ ! -z "$package" ]; then
@@ -43,6 +45,11 @@ if [ ! -z "$package" ]; then
     mkdir -p "$name"/src/main/java/"$path"
     mv -v "$name"/src/main/java/com/cavetale/"$lower" "$name"/src/main/java/"$path"/
     rmdir --ignore-fail-on-non-empty -p "$name"/src/main/java/com/cavetale/
+
+    mkdir -p "$name"/src/test/java/"$path"
+    mv -v "$name"/src/test/java/com/cavetale/"$lower" "$name"/src/test/java/"$path"/
+    rmdir --ignore-fail-on-non-empty -p "$name"/src/test/java/com/cavetale/
+
     find "$name" -type f -exec sed -i "s/com\.cavetale/${package}/g" {} \;
 fi
 
